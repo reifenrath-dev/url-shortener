@@ -1,0 +1,34 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n            select count(*) as amount, referer, user_agent\n            from link_statistics\n            where link_id = $1\n            group by link_id, referer, user_agent\n            ",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "amount",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 1,
+        "name": "referer",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 2,
+        "name": "user_agent",
+        "type_info": "Text"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Text"
+      ]
+    },
+    "nullable": [
+      null,
+      true,
+      true
+    ]
+  },
+  "hash": "6b7fe53071b6d076fc88614e51b305990dd2ae01e4b04b7e6ff3984a6b20e59a"
+}

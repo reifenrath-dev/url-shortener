@@ -1,0 +1,85 @@
+### Health
+GET {{url}}/api/health
+
+### Metrics
+GET {{url}}/api/metrics
+X-API-KEY: {{api-key}}
+
+### Create New Entry
+POST {{url}}/api/create
+Content-Type: application/json
+X-API-KEY: {{api-key}}
+
+{
+    "targetUrl": "https://blog.reifenrath.dev"
+}
+
+### Redirect
+GET {{url}}/MTE2NzQzMzM
+
+### Create New Entry with Alias
+POST {{url}}/api/create
+Content-Type: application/json
+X-API-KEY: {{api-key}}
+
+{
+  "targetUrl": "https://blog.reifenrath.dev",
+  "alias": "blog"
+}
+
+### Create New Entry with /api in Path
+POST {{url}}/api/create
+Content-Type: application/json
+X-API-KEY: {{api-key}}
+
+{
+  "targetUrl": "https://blog.reifenrath.dev",
+  "alias": "api"
+}
+
+### Redirect to Alias
+GET {{url}}/blog
+
+### Create New Entry with Sub Path Alias
+POST {{url}}/api/create
+Content-Type: application/json
+X-API-KEY: {{api-key}}
+
+{
+  "targetUrl": "https://levelup.gitconnected.com/3-practical-git-aliases-for-power-users-a42b99cb0d80",
+  "alias": "b/git-aliases"
+}
+
+### Patch Alias
+PATCH {{url}}/api/b/git-aliases
+Content-Type: application/json
+X-API-KEY: {{api-key}}
+
+{
+  "targetUrl": "https://blog.reifenrath.dev"
+}
+
+### Redirect to Alias with Sub Path
+GET {{url}}/b/git-aliases
+
+### Redirect Malformed Alias
+GET {{url}}/b.12fasd
+
+### Patch
+PATCH {{url}}/MjkwOTMwNjUzMw
+Content-Type: application/json
+
+{
+  "targetUrl": "https://blog.reifenrath.dev"
+}
+
+### Statistics Unauthorized
+GET {{url}}/api/statistics/MjkwOTMwNjUzMw
+
+### Statistics
+GET {{url}}/api/statistics/MjkwOTMwNjUzMw
+X-API-KEY: {{api-key}}
+
+### Statistics for Alias
+GET {{url}}/api/statistics/blog
+X-API-KEY: {{api-key}}

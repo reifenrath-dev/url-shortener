@@ -1,0 +1,12 @@
+services:
+  api:
+    image: reifenrathdev/url-shortener
+    environment:
+      - DATABASE_URL=postgres://url-shortener:${POSTGRES_PASSWORD}@db:5432
+      - RUST_LOG=debug
+      - RUST_BACKTRACE=full
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "443:443"
