@@ -49,6 +49,8 @@ async fn main() -> Result<(), Box<dyn Error>> {
         .route("/api/health", get(health))
         .layer(TraceLayer::new_for_http())
         .layer(prometheus_layer)
+        // All functional routes need to be initialized before this so the wildcard_router
+        // can take care of ALL other routes that users can specify.
         .fallback_service(wildcard_router(db.clone()))
         .with_state(db);
 
@@ -70,6 +72,9 @@ async fn main() -> Result<(), Box<dyn Error>> {
     Ok(())
 }
 
+/// This wildcard_router function sets up a router with two main route patterns:
+/// 1. A catch-all route at the root level (`/{*id}`) that redirects all requests
+/// 2. An API route pattern (`/api/{*id}`) that handles PATCH requests with authentication middleware
 fn wildcard_router(db: Pool<Postgres>) -> Router {
     Router::new()
         .route("/{*id}", get(redirect))

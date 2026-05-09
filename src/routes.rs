@@ -38,11 +38,6 @@ pub struct CountedLinkStatistic {
     pub user_agent: Option<String>,
 }
 
-fn generate_id() -> String {
-    let random_number = rand::rng().random_range(0..u32::MAX);
-    general_purpose::URL_SAFE_NO_PAD.encode(random_number.to_string())
-}
-
 pub async fn health() -> impl IntoResponse {
     (StatusCode::OK, "OK")
 }
@@ -240,7 +235,12 @@ pub async fn get_link_statistics(
     Ok(Json(statistics))
 }
 
-pub fn is_valid_link_id(link_id: &String) -> bool {
+fn generate_id() -> String {
+    let random_number = rand::rng().random_range(0..u32::MAX);
+    general_purpose::URL_SAFE_NO_PAD.encode(random_number.to_string())
+}
+
+fn is_valid_link_id(link_id: &String) -> bool {
     !link_id.starts_with("api") &&
     link_id
         .chars()
