@@ -6,6 +6,7 @@ use axum::response::IntoResponse;
 use metrics::counter;
 use sha3::{Digest, Sha3_256};
 use sqlx::PgPool;
+use hex;
 
 struct Setting {
     #[allow(dead_code)]
@@ -50,7 +51,7 @@ pub async fn auth(
     hasher.update(api_key.as_bytes());
     let provided_api_key = hasher.finalize();
 
-    if setting.encrypted_global_api_key != format!("{provided_api_key:x}") {
+    if setting.encrypted_global_api_key != hex::encode(provided_api_key) {
         tracing::error!("Unauthorized call to API: Incorrect key supplied");
         counter!("unauthenticated_calls_count", &labels).increment(1);
 

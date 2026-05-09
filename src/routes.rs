@@ -6,7 +6,7 @@ use axum::response::{IntoResponse, Response};
 use axum::Json;
 use base64::engine::general_purpose;
 use base64::Engine;
-use rand::Rng;
+use rand::{RngExt};
 use sqlx::error::ErrorKind;
 use sqlx::{Error, PgPool};
 use std::time::Duration;

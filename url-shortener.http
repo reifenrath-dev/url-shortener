@@ -15,7 +15,7 @@ X-API-KEY: {{api-key}}
 }
 
 ### Redirect
-GET {{url}}/MTE2NzQzMzM
+GET {{url}}/MzE2Mjg0NzAyNA
 
 ### Create New Entry with Alias
 POST {{url}}/api/create
